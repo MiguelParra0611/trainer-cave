@@ -83,7 +83,9 @@ export function FavoriteButton({
         aria-label={isFavorite ? "Remove from favorites" : "Add to favorites"}
         className={`inline-flex h-10 w-11 items-center justify-center rounded-full bg-white/90 text-lg shadow-sm backdrop-blur hover:bg-white disabled:opacity-60 dark:bg-zinc-900/90 dark:hover:bg-zinc-900 ${className}`}
       >
-        <span className={isFavorite ? "text-brand-red" : "text-zinc-400"}>
+        <span
+          className={`inline-block scale-x-125 ${isFavorite ? "text-brand-red" : "text-zinc-400"}`}
+        >
           {isFavorite ? "♥" : "♡"}
         </span>
       </button>
