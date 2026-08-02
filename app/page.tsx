@@ -17,7 +17,7 @@ export default async function Home({
     <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6">
       <h1 className="text-4xl text-brand-navy dark:text-white">
         <span className="font-display-alt uppercase tracking-wide">Trainer</span>{" "}
-        <span className="font-display text-brand-blue tracking-wide">Cave</span>
+        <span className="font-display uppercase text-brand-blue tracking-wide">Cave</span>
       </h1>
       <p className="mt-2 max-w-xl text-zinc-600 dark:text-zinc-400">
         Fictional Pokémon merch, made for portfolio purposes only. Nothing

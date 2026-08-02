@@ -12,7 +12,7 @@ export async function Header() {
         <Link href="/" className="flex items-center gap-2 text-lg">
           <Logo className="h-8 w-8" />
           <span className="font-display-alt uppercase tracking-wide">Trainer</span>{" "}
-          <span className="font-display text-brand-yellow tracking-wide">Cave</span>
+          <span className="font-display uppercase text-brand-yellow tracking-wide">Cave</span>
         </Link>
         <nav className="flex items-center gap-4 text-sm font-medium">
           <Link href="/" className="hover:text-brand-blue">
