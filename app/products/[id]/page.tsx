@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import { AddToCartButton } from "@/components/product/AddToCartButton";
+import { FavoriteButton } from "@/components/product/FavoriteButton";
 import { PokedexBonus } from "@/components/product/PokedexBonus";
 import { TypeBadge } from "@/components/product/TypeBadge";
 import { getProductById } from "@/lib/catalog";
@@ -80,8 +81,9 @@ export default async function ProductDetailPage({
             Includes a {pokemonName} collectible stats card with every order.
           </p>
 
-          <div className="mt-6">
+          <div className="mt-6 flex items-center gap-3">
             <AddToCartButton productId={product.id} />
+            <FavoriteButton productId={product.id} />
           </div>
 
           <PokedexBonus flavorText={flavorText} cryUrl={cryUrl} />

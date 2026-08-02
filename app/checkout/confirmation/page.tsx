@@ -1,0 +1,113 @@
+"use client";
+
+import Link from "next/link";
+import { useEffect, useState } from "react";
+import { SouvenirStatCard } from "@/components/checkout/SouvenirStatCard";
+import { formatPokemonName, formatPrice } from "@/lib/format";
+
+type OrderItem = {
+  productId: string;
+  name: string;
+  quantity: number;
+  unitPriceCents: number;
+  pokemon: {
+    name: string;
+    spriteUrl: string;
+    hp: number;
+    attack: number;
+    defense: number;
+    special_attack: number;
+    special_defense: number;
+    speed: number;
+  };
+};
+
+type OrderSummary = {
+  orderId: string;
+  createdAt: string;
+  totalCents: number;
+  currency: string;
+  items: OrderItem[];
+};
+
+export default function CheckoutConfirmationPage() {
+  const [order, setOrder] = useState<OrderSummary | null>(null);
+  const [checked, setChecked] = useState(false);
+
+  useEffect(() => {
+    const raw = sessionStorage.getItem("trainer-cave:last-order");
+    if (raw) setOrder(JSON.parse(raw));
+    setChecked(true);
+  }, []);
+
+  if (!checked) return null;
+
+  if (!order) {
+    return (
+      <div className="mx-auto max-w-lg px-4 py-16 text-center sm:px-6">
+        <p className="text-zinc-500 dark:text-zinc-400">
+          No recent order found.{" "}
+          <Link href="/" className="text-brand-navy underline dark:text-brand-blue">
+            Back to the catalog
+          </Link>
+          .
+        </p>
+      </div>
+    );
+  }
+
+  const uniquePokemon = Array.from(
+    new Map(order.items.map((item) => [item.pokemon.name, item.pokemon])).values(),
+  );
+
+  return (
+    <div className="mx-auto max-w-2xl px-4 py-10 sm:px-6">
+      <h1 className="text-2xl font-bold text-brand-navy dark:text-white">
+        Order confirmed!
+      </h1>
+      <p className="mt-1 text-sm text-zinc-500 dark:text-zinc-400">
+        Order <span className="font-mono">{order.orderId}</span> — this is a
+        simulated order, nothing was actually shipped or charged.
+      </p>
+
+      <div className="mt-6 rounded-lg border border-zinc-200 p-4 dark:border-zinc-800">
+        {order.items.map((item) => (
+          <div key={item.productId} className="flex justify-between py-1 text-sm">
+            <span>
+              {item.name} × {item.quantity}
+            </span>
+            <span>{formatPrice(item.unitPriceCents * item.quantity, order.currency)}</span>
+          </div>
+        ))}
+        <div className="mt-2 flex justify-between border-t border-zinc-200 pt-2 font-semibold dark:border-zinc-800">
+          <span>Total</span>
+          <span>{formatPrice(order.totalCents, order.currency)}</span>
+        </div>
+      </div>
+
+      <h2 className="mt-8 text-lg font-semibold text-brand-navy dark:text-white">
+        Your collectible cards
+      </h2>
+      <p className="text-sm text-zinc-500 dark:text-zinc-400">
+        Every order includes a stats card for each Pokémon you bought.
+      </p>
+      <div className="mt-4 flex flex-wrap gap-4">
+        {uniquePokemon.map((pokemon) => (
+          <SouvenirStatCard
+            key={pokemon.name}
+            pokemonName={formatPokemonName(pokemon.name)}
+            spriteUrl={pokemon.spriteUrl}
+            stats={pokemon}
+          />
+        ))}
+      </div>
+
+      <Link
+        href="/"
+        className="mt-8 inline-block rounded-full bg-brand-navy px-6 py-2.5 font-medium text-white hover:bg-brand-blue"
+      >
+        Back to the catalog
+      </Link>
+    </div>
+  );
+}
