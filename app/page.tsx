@@ -15,7 +15,7 @@ export default async function Home({
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6">
-      <h1 className="text-3xl font-bold tracking-tight text-brand-navy dark:text-white">
+      <h1 className="font-display text-4xl tracking-wide text-brand-navy dark:text-white">
         Trainer <span className="text-brand-blue">Cave</span>
       </h1>
       <p className="mt-2 max-w-xl text-zinc-600 dark:text-zinc-400">
