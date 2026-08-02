@@ -9,9 +9,10 @@ export async function Header() {
   return (
     <header className="bg-brand-navy text-white">
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-4 sm:px-6">
-        <Link href="/" className="flex items-center gap-2 font-display text-lg tracking-wide">
+        <Link href="/" className="flex items-center gap-2 text-lg">
           <Logo className="h-8 w-8" />
-          Trainer <span className="text-brand-yellow">Cave</span>
+          <span className="font-display-alt uppercase tracking-wide">Trainer</span>{" "}
+          <span className="font-display text-brand-yellow tracking-wide">Cave</span>
         </Link>
         <nav className="flex items-center gap-4 text-sm font-medium">
           <Link href="/" className="hover:text-brand-blue">

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Fredoka, Geist, Geist_Mono } from "next/font/google";
+import { Bungee, Fredoka, Geist, Geist_Mono } from "next/font/google";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import "./globals.css";
@@ -20,6 +20,12 @@ const fredoka = Fredoka({
   weight: ["600", "700"],
 });
 
+const bungee = Bungee({
+  variable: "--font-bungee",
+  subsets: ["latin"],
+  weight: "400",
+});
+
 export const metadata: Metadata = {
   title: "Trainer Cave",
   description:
@@ -34,7 +40,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} ${fredoka.variable} h-full antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} ${fredoka.variable} ${bungee.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
         <Header />
