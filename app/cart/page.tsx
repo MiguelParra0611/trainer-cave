@@ -71,12 +71,12 @@ export default function CartPage() {
 
   return (
     <div className="mx-auto max-w-3xl px-4 py-10 sm:px-6">
-      <h1 className="text-2xl font-bold text-brand-navy dark:text-white">Cart</h1>
+      <h1 className="text-2xl font-bold text-brand-navy">Cart</h1>
 
       {!loading && rows.length === 0 ? (
-        <p className="mt-4 text-zinc-500 dark:text-zinc-400">
+        <p className="mt-4 text-zinc-500 dark:text-zinc-600">
           Your cart is empty.{" "}
-          <Link href="/" className="text-brand-navy underline dark:text-brand-blue">
+          <Link href="/" className="text-brand-red underline">
             Browse the catalog
           </Link>
           .
@@ -97,14 +97,14 @@ export default function CartPage() {
 
           <div className="mt-6 flex items-center justify-between">
             <span className="text-lg font-semibold">Subtotal</span>
-            <span className="text-lg font-semibold text-brand-navy dark:text-brand-blue">
+            <span className="text-lg font-semibold text-brand-red">
               {formatPrice(subtotalCents, currency)}
             </span>
           </div>
 
           <Link
             href="/checkout"
-            className="mt-6 block w-full rounded-full bg-brand-navy px-4 py-3 text-center font-medium text-white hover:bg-brand-blue"
+            className="mt-6 block w-full rounded-full bg-brand-red px-4 py-3 text-center font-medium text-white hover:bg-brand-red/90"
           >
             Proceed to Checkout
           </Link>

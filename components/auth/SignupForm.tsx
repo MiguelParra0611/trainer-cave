@@ -43,7 +43,7 @@ export function SignupForm() {
 
   if (needsConfirmation) {
     return (
-      <p className="text-sm text-zinc-600 dark:text-zinc-400">
+      <p className="text-sm text-zinc-600 dark:text-zinc-600">
         Check your inbox at <strong>{email}</strong> for a confirmation link
         to finish creating your account.
       </p>
@@ -83,7 +83,7 @@ export function SignupForm() {
       <button
         type="submit"
         disabled={loading}
-        className="w-full rounded-full bg-brand-navy px-4 py-2.5 font-medium text-white hover:bg-brand-blue disabled:opacity-70"
+        className="w-full rounded-full bg-brand-red px-4 py-2.5 font-medium text-white hover:bg-brand-red/90 disabled:opacity-70"
       >
         {loading ? "Creating account…" : "Sign up"}
       </button>

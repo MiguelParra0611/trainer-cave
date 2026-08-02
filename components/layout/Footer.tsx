@@ -1,6 +1,6 @@
 export function Footer() {
   return (
-    <footer className="bg-brand-navy text-white/70">
+    <footer className="bg-brand-red text-white/70">
       <div className="mx-auto max-w-6xl px-4 py-6 text-xs sm:px-6">
         <p>
           Trainer Cave is a non-commercial portfolio project. No real
@@ -15,7 +15,7 @@ export function Footer() {
             href="https://pokeapi.co/"
             target="_blank"
             rel="noreferrer"
-            className="text-brand-blue underline"
+            className="text-brand-yellow underline"
           >
             PokéAPI
           </a>

@@ -15,11 +15,11 @@ export default async function Home({
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6">
-      <h1 className="text-4xl text-brand-navy dark:text-white">
+      <h1 className="text-4xl text-brand-navy">
         <span className="font-display-alt uppercase tracking-wide">Trainer</span>{" "}
         <span className="font-display uppercase text-brand-blue tracking-wide">Cave</span>
       </h1>
-      <p className="mt-2 max-w-xl text-zinc-600 dark:text-zinc-400">
+      <p className="mt-2 max-w-xl text-zinc-600 dark:text-zinc-600">
         Fictional Pokémon merch, made for portfolio purposes only. Nothing
         here is actually for sale.
       </p>
@@ -35,7 +35,7 @@ export default async function Home({
 
         <div>
           {products.length === 0 ? (
-            <p className="text-zinc-500 dark:text-zinc-400">
+            <p className="text-zinc-500 dark:text-zinc-600">
               No products match these filters.
             </p>
           ) : (

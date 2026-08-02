@@ -14,7 +14,7 @@ export function ProductCard({
   imageUrl: string;
 }) {
   return (
-    <div className="group relative overflow-hidden rounded-lg border border-zinc-200 transition-shadow hover:border-brand-blue hover:shadow-md dark:border-zinc-800">
+    <div className="group relative overflow-hidden rounded-lg border border-zinc-200 transition-shadow hover:border-brand-red hover:shadow-md dark:border-zinc-800">
       {/* Sibling to the Link below, not a descendant — nesting a <button> inside
           an <a> would bubble clicks into the anchor and trigger navigation. */}
       <FavoriteButton
@@ -33,7 +33,7 @@ export function ProductCard({
             sizes="(min-width: 1024px) 25vw, (min-width: 640px) 33vw, 50vw"
           />
         </div>
-        <div className="space-y-2 p-4 pb-2">
+        <div className="space-y-2 bg-zinc-100 p-4 pb-2 dark:bg-zinc-800">
           <div className="flex flex-wrap gap-1.5">
             {product.pokemon.types.map((type) => (
               <TypeBadge key={type.id} name={type.name} colorHex={type.color_hex} />
@@ -43,7 +43,7 @@ export function ProductCard({
           <p className="text-sm text-zinc-500 dark:text-zinc-400">
             {product.article_type.name} · {formatPokemonName(product.pokemon.name)}
           </p>
-          <p className="font-semibold text-brand-navy dark:text-brand-blue">
+          <p className="font-semibold text-brand-red">
             {formatPrice(product.price_cents, product.currency)}
           </p>
         </div>

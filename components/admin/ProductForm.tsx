@@ -191,7 +191,7 @@ export function ProductForm({
       <button
         type="submit"
         disabled={submitting}
-        className="rounded-full bg-brand-navy px-6 py-2.5 font-medium text-white hover:bg-brand-blue disabled:opacity-70"
+        className="rounded-full bg-brand-red px-6 py-2.5 font-medium text-white hover:bg-brand-red/90 disabled:opacity-70"
       >
         {submitting ? "Saving…" : isEditing ? "Save Changes" : "Create Product"}
       </button>

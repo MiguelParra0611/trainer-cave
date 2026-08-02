@@ -11,12 +11,12 @@ export default async function AdminProductsPage() {
   return (
     <div>
       <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-bold text-brand-navy dark:text-white">
+        <h1 className="text-2xl font-bold text-brand-navy">
           Products
         </h1>
         <Link
           href="/admin/products/new"
-          className="rounded-full bg-brand-navy px-4 py-2 text-sm font-medium text-white hover:bg-brand-blue"
+          className="rounded-full bg-brand-red px-4 py-2 text-sm font-medium text-white hover:bg-brand-red/90"
         >
           New Product
         </Link>
@@ -38,19 +38,19 @@ export default async function AdminProductsPage() {
               <p className="truncate font-medium">
                 {product.name}{" "}
                 {!product.is_active && (
-                  <span className="ml-1 rounded-full bg-zinc-200 px-2 py-0.5 text-xs text-zinc-600 dark:bg-zinc-800 dark:text-zinc-400">
+                  <span className="ml-1 rounded-full bg-zinc-200 px-2 py-0.5 text-xs text-zinc-600 dark:bg-zinc-800 dark:text-zinc-600">
                     inactive
                   </span>
                 )}
               </p>
-              <p className="text-sm text-zinc-500 dark:text-zinc-400">
+              <p className="text-sm text-zinc-500 dark:text-zinc-600">
                 {product.article_type.name} · {formatPokemonName(product.pokemon.name)} ·{" "}
                 {formatPrice(product.price_cents, product.currency)}
               </p>
             </div>
             <Link
               href={`/admin/products/${product.id}/edit`}
-              className="text-sm text-brand-navy hover:underline dark:text-brand-blue"
+              className="text-sm text-brand-red hover:underline"
             >
               Edit
             </Link>

@@ -37,7 +37,7 @@ export function ProductRowActions({
         type="button"
         onClick={toggleActive}
         disabled={busy}
-        className="text-brand-navy hover:underline disabled:opacity-60 dark:text-brand-blue"
+        className="text-brand-red hover:underline disabled:opacity-60"
       >
         {isActive ? "Deactivate" : "Activate"}
       </button>

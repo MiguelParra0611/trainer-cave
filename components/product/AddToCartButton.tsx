@@ -24,7 +24,7 @@ export function AddToCartButton({
         setAdded(true);
         setTimeout(() => setAdded(false), 1500);
       }}
-      className={`rounded-full bg-brand-navy font-medium text-white transition-colors hover:bg-brand-blue disabled:opacity-70 ${sizeClasses} ${className}`}
+      className={`rounded-full bg-brand-red font-medium text-white transition-colors hover:bg-brand-red/90 disabled:opacity-70 ${sizeClasses} ${className}`}
       disabled={added}
     >
       {added ? "Added ✓" : "Add to Cart"}

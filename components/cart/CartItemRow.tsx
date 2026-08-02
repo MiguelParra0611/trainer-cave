@@ -33,7 +33,7 @@ export function CartItemRow({
         <Link href={`/products/${product.id}`} className="font-medium hover:underline">
           {product.name}
         </Link>
-        <p className="text-sm text-zinc-500 dark:text-zinc-400">
+        <p className="text-sm text-zinc-500 dark:text-zinc-600">
           {formatPrice(product.price_cents, product.currency)}
         </p>
       </div>

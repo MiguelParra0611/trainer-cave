@@ -61,7 +61,7 @@ export function LoginForm() {
       <button
         type="submit"
         disabled={loading}
-        className="w-full rounded-full bg-brand-navy px-4 py-2.5 font-medium text-white hover:bg-brand-blue disabled:opacity-70"
+        className="w-full rounded-full bg-brand-red px-4 py-2.5 font-medium text-white hover:bg-brand-red/90 disabled:opacity-70"
       >
         {loading ? "Logging in…" : "Log in"}
       </button>

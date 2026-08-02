@@ -64,16 +64,16 @@ export default async function ProductDetailPage({
               <TypeBadge key={type.id} name={type.name} colorHex={type.color_hex} />
             ))}
           </div>
-          <h1 className="mt-2 text-2xl font-bold text-brand-navy dark:text-white">
+          <h1 className="mt-2 text-2xl font-bold text-brand-navy">
             {product.name}
           </h1>
-          <p className="text-sm text-zinc-500 dark:text-zinc-400">
+          <p className="text-sm text-zinc-500 dark:text-zinc-600">
             {product.article_type.name} · {pokemonName}
           </p>
-          <p className="mt-3 text-2xl font-semibold text-brand-navy dark:text-brand-blue">
+          <p className="mt-3 text-2xl font-semibold text-brand-red">
             {formatPrice(product.price_cents, product.currency)}
           </p>
-          <p className="mt-4 text-zinc-600 dark:text-zinc-400">
+          <p className="mt-4 text-zinc-600 dark:text-zinc-600">
             {product.description}
           </p>
 

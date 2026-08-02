@@ -7,7 +7,7 @@ export async function Header() {
   const user = await getCurrentUser();
 
   return (
-    <header className="bg-brand-navy text-white">
+    <header className="bg-brand-red text-white">
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-4 sm:px-6">
         <Link href="/" className="flex items-center gap-2 text-lg">
           <Logo className="h-8 w-8" />
@@ -15,17 +15,17 @@ export async function Header() {
           <span className="font-display uppercase text-brand-yellow tracking-wide">Cave</span>
         </Link>
         <nav className="flex items-center gap-4 text-sm font-medium">
-          <Link href="/" className="hover:text-brand-blue">
+          <Link href="/" className="hover:text-brand-yellow">
             Catalog
           </Link>
-          <Link href="/favorites" className="hover:text-brand-blue">
+          <Link href="/favorites" className="hover:text-brand-yellow">
             Favorites
           </Link>
-          <Link href="/cart" className="hover:text-brand-blue">
+          <Link href="/cart" className="hover:text-brand-yellow">
             Cart
           </Link>
           {user?.isAdmin && (
-            <Link href="/admin/products" className="hover:text-brand-blue">
+            <Link href="/admin/products" className="hover:text-brand-yellow">
               Admin
             </Link>
           )}
@@ -34,7 +34,7 @@ export async function Header() {
           ) : (
             <Link
               href="/login"
-              className="rounded-full bg-brand-blue px-3 py-1.5 text-brand-navy hover:bg-brand-yellow"
+              className="rounded-full bg-white px-3 py-1.5 text-brand-red hover:bg-brand-yellow"
             >
               Log in
             </Link>

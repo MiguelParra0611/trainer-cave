@@ -15,7 +15,7 @@ export function LogoutButton() {
         router.push("/");
         router.refresh();
       }}
-      className="hover:text-brand-blue"
+      className="hover:text-brand-yellow"
     >
       Log out
     </button>

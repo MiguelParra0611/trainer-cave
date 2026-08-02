@@ -36,7 +36,7 @@ export function SouvenirStatCard({
           <p className="text-xs font-semibold uppercase tracking-wide text-brand-gold">
             Collectible Card
           </p>
-          <h4 className="font-semibold capitalize text-brand-navy dark:text-white">
+          <h4 className="font-semibold capitalize text-brand-navy">
             {pokemonName}
           </h4>
         </div>
@@ -44,7 +44,7 @@ export function SouvenirStatCard({
       <dl className="mt-4 space-y-1.5">
         {STATS.map(({ key, label }) => (
           <div key={key} className="flex items-center gap-2 text-xs">
-            <dt className="w-16 shrink-0 text-zinc-500 dark:text-zinc-400">{label}</dt>
+            <dt className="w-16 shrink-0 text-zinc-500 dark:text-zinc-600">{label}</dt>
             <dd className="flex-1">
               <div className="h-1.5 w-full rounded-full bg-zinc-100 dark:bg-zinc-800">
                 <div
@@ -55,7 +55,7 @@ export function SouvenirStatCard({
                 />
               </div>
             </dd>
-            <dd className="w-6 shrink-0 text-right font-medium text-brand-navy dark:text-white">
+            <dd className="w-6 shrink-0 text-right font-medium text-brand-navy">
               {stats[key]}
             </dd>
           </div>

@@ -25,7 +25,7 @@ function FilterGroup({
           onClick={() => onChange(paramKey, null)}
           className={`rounded-full border px-3 py-1 text-xs ${
             activeValue === null
-              ? "border-brand-navy bg-brand-navy text-white dark:border-brand-blue dark:bg-brand-blue dark:text-brand-navy"
+              ? "border-brand-red bg-brand-red text-white"
               : "border-zinc-300 dark:border-zinc-700"
           }`}
         >
@@ -38,7 +38,7 @@ function FilterGroup({
             onClick={() => onChange(paramKey, option.value)}
             className={`rounded-full border px-3 py-1 text-xs capitalize ${
               activeValue === option.value
-                ? "border-zinc-900 bg-zinc-900 text-white dark:border-zinc-100 dark:bg-zinc-100 dark:text-zinc-900"
+                ? "border-brand-red bg-brand-red text-white"
                 : "border-zinc-300 dark:border-zinc-700"
             }`}
           >

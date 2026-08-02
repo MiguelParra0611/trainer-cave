@@ -81,9 +81,9 @@ export default function CheckoutPage() {
   if (!loading && rows.length === 0) {
     return (
       <div className="mx-auto max-w-lg px-4 py-16 text-center sm:px-6">
-        <p className="text-zinc-500 dark:text-zinc-400">
+        <p className="text-zinc-500 dark:text-zinc-600">
           Your cart is empty.{" "}
-          <Link href="/" className="text-brand-navy underline dark:text-brand-blue">
+          <Link href="/" className="text-brand-red underline">
             Browse the catalog
           </Link>
           .
@@ -94,10 +94,10 @@ export default function CheckoutPage() {
 
   return (
     <div className="mx-auto max-w-lg px-4 py-10 sm:px-6">
-      <h1 className="text-2xl font-bold text-brand-navy dark:text-white">
+      <h1 className="text-2xl font-bold text-brand-navy">
         Checkout
       </h1>
-      <p className="mt-1 text-sm text-zinc-500 dark:text-zinc-400">
+      <p className="mt-1 text-sm text-zinc-500 dark:text-zinc-600">
         This is a simulated checkout — no real payment is collected.
       </p>
 
@@ -147,7 +147,7 @@ export default function CheckoutPage() {
         <button
           type="submit"
           disabled={submitting || rows.length === 0}
-          className="w-full rounded-full bg-brand-navy px-4 py-3 font-medium text-white hover:bg-brand-blue disabled:opacity-70"
+          className="w-full rounded-full bg-brand-red px-4 py-3 font-medium text-white hover:bg-brand-red/90 disabled:opacity-70"
         >
           {submitting ? "Placing order…" : "Confirm Order"}
         </button>

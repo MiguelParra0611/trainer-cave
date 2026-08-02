@@ -45,9 +45,9 @@ export default function CheckoutConfirmationPage() {
   if (!order) {
     return (
       <div className="mx-auto max-w-lg px-4 py-16 text-center sm:px-6">
-        <p className="text-zinc-500 dark:text-zinc-400">
+        <p className="text-zinc-500 dark:text-zinc-600">
           No recent order found.{" "}
-          <Link href="/" className="text-brand-navy underline dark:text-brand-blue">
+          <Link href="/" className="text-brand-red underline">
             Back to the catalog
           </Link>
           .
@@ -62,10 +62,10 @@ export default function CheckoutConfirmationPage() {
 
   return (
     <div className="mx-auto max-w-2xl px-4 py-10 sm:px-6">
-      <h1 className="text-2xl font-bold text-brand-navy dark:text-white">
+      <h1 className="text-2xl font-bold text-brand-navy">
         Order confirmed!
       </h1>
-      <p className="mt-1 text-sm text-zinc-500 dark:text-zinc-400">
+      <p className="mt-1 text-sm text-zinc-500 dark:text-zinc-600">
         Order <span className="font-mono">{order.orderId}</span> — this is a
         simulated order, nothing was actually shipped or charged.
       </p>
@@ -85,10 +85,10 @@ export default function CheckoutConfirmationPage() {
         </div>
       </div>
 
-      <h2 className="mt-8 text-lg font-semibold text-brand-navy dark:text-white">
+      <h2 className="mt-8 text-lg font-semibold text-brand-navy">
         Your collectible cards
       </h2>
-      <p className="text-sm text-zinc-500 dark:text-zinc-400">
+      <p className="text-sm text-zinc-500 dark:text-zinc-600">
         Every order includes a stats card for each Pokémon you bought.
       </p>
       <div className="mt-4 flex flex-wrap gap-4">
@@ -104,7 +104,7 @@ export default function CheckoutConfirmationPage() {
 
       <Link
         href="/"
-        className="mt-8 inline-block rounded-full bg-brand-navy px-6 py-2.5 font-medium text-white hover:bg-brand-blue"
+        className="mt-8 inline-block rounded-full bg-brand-red px-6 py-2.5 font-medium text-white hover:bg-brand-red/90"
       >
         Back to the catalog
       </Link>
