@@ -135,10 +135,10 @@ export function SouvenirStatCard({
           className="absolute inset-0 overflow-hidden rounded-xl border-2 border-brand-gold bg-white p-4 shadow-lg"
           style={{ backfaceVisibility: "hidden", transform: "rotateY(180deg)" }}
         >
-          <div className="flex items-center gap-2">
+          <div className="flex flex-col items-center">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={spriteUrl} alt="" className="h-10 w-10 object-contain" />
-            <h4 className="font-semibold capitalize text-brand-navy">{pokemonName}</h4>
+            <img src={spriteUrl} alt="" className="h-16 w-16 object-contain" />
+            <h4 className="mt-1 font-semibold capitalize text-brand-navy">{pokemonName}</h4>
           </div>
           <div className="mt-4">
             <StatBars
