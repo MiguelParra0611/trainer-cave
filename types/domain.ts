@@ -23,6 +23,7 @@ export type Pokemon = {
   special_attack: number;
   special_defense: number;
   speed: number;
+  card_image_path: string | null;
 };
 
 export type PokemonWithTypes = Pokemon & {

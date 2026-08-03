@@ -174,6 +174,7 @@ export type Database = {
       pokemon: {
         Row: {
           attack: number
+          card_image_path: string | null
           created_at: string
           defense: number
           generation_id: number
@@ -189,6 +190,7 @@ export type Database = {
         }
         Insert: {
           attack: number
+          card_image_path?: string | null
           created_at?: string
           defense: number
           generation_id: number
@@ -204,6 +206,7 @@ export type Database = {
         }
         Update: {
           attack?: number
+          card_image_path?: string | null
           created_at?: string
           defense?: number
           generation_id?: number

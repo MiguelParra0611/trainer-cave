@@ -33,6 +33,25 @@ const GENERATIONS = [
 
 const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
+const CARD_IMAGE_EXTENSIONS = [".jpg", ".jpeg", ".png", ".webp"];
+
+/** Looks for supabase/seed/images/cards/{slug}.{jpg|jpeg|png|webp}, if the user has provided one yet. */
+async function findCardImage(
+  slug: string,
+): Promise<{ ext: string; buffer: Buffer } | null> {
+  for (const ext of CARD_IMAGE_EXTENSIONS) {
+    try {
+      const buffer = await readFile(
+        path.join(__dirname, "images", "cards", `${slug}${ext}`),
+      );
+      return { ext, buffer };
+    } catch {
+      continue;
+    }
+  }
+  return null;
+}
+
 function statValue(
   stats: { base_stat: number; stat: { name: string } }[],
   name: string,
@@ -75,6 +94,19 @@ async function seedPokemon(supabase: ReturnType<typeof createAdminClient>) {
     const spriteUrl = pokemon.sprites.other["official-artwork"].front_default;
     if (!spriteUrl) throw new Error(`No official artwork sprite for #${id}`);
 
+    let cardImagePath: string | null = null;
+    const cardImage = await findCardImage(pokemon.name);
+    if (cardImage) {
+      cardImagePath = `cards/${pokemon.name}${cardImage.ext}`;
+      const { error: cardUploadError } = await supabase.storage
+        .from("product-images")
+        .upload(cardImagePath, cardImage.buffer, {
+          contentType: CONTENT_TYPE_BY_EXT[cardImage.ext] ?? "application/octet-stream",
+          upsert: true,
+        });
+      if (cardUploadError) throw cardUploadError;
+    }
+
     const { error: pokemonError } = await supabase.from("pokemon").upsert({
       id: pokemon.id,
       name: pokemon.name,
@@ -88,6 +120,7 @@ async function seedPokemon(supabase: ReturnType<typeof createAdminClient>) {
       special_attack: statValue(pokemon.stats, "special-attack"),
       special_defense: statValue(pokemon.stats, "special-defense"),
       speed: statValue(pokemon.stats, "speed"),
+      card_image_path: cardImagePath,
     });
     if (pokemonError) throw pokemonError;
 
@@ -107,7 +140,9 @@ async function seedPokemon(supabase: ReturnType<typeof createAdminClient>) {
       );
     if (typeMapError) throw typeMapError;
 
-    console.log(`Seeded pokemon: ${pokemon.name} (#${pokemon.id})`);
+    console.log(
+      `Seeded pokemon: ${pokemon.name} (#${pokemon.id})${cardImagePath ? " [card image]" : ""}`,
+    );
     await sleep(75);
   }
 }

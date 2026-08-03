@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { PRODUCT_SELECT, toProductWithRelations, type RawProductRow } from "@/lib/product-select";
 import { createClient } from "@/lib/supabase/server";
+import { productImageUrl } from "@/lib/storage";
 
 type CheckoutRequestItem = { productId: string; quantity: number };
 
@@ -93,6 +94,9 @@ export async function POST(request: Request) {
       pokemon: {
         name: product.pokemon.name,
         spriteUrl: product.pokemon.sprite_url,
+        cardImageUrl: product.pokemon.card_image_path
+          ? productImageUrl(product.pokemon.card_image_path)
+          : null,
         hp: product.pokemon.hp,
         attack: product.pokemon.attack,
         defense: product.pokemon.defense,

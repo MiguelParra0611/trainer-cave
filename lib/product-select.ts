@@ -23,6 +23,7 @@ export type RawProductRow = {
     special_attack: number;
     special_defense: number;
     speed: number;
+    card_image_path: string | null;
     pokemon_type_map: { pokemon_types: PokemonType }[];
   };
   article_type: ArticleType;
@@ -33,7 +34,7 @@ export const PRODUCT_SELECT = `
   id, pokemon_id, article_type_id, name, description, price_cents, currency, primary_image_path, is_active,
   pokemon:pokemon_id (
     id, name, slug, generation_id, sprite_url, pokedex_number,
-    hp, attack, defense, special_attack, special_defense, speed,
+    hp, attack, defense, special_attack, special_defense, speed, card_image_path,
     pokemon_type_map ( pokemon_types ( id, name, color_hex ) )
   ),
   article_type:article_type_id ( id, slug, name )

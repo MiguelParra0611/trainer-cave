@@ -13,6 +13,7 @@ type OrderItem = {
   pokemon: {
     name: string;
     spriteUrl: string;
+    cardImageUrl: string | null;
     hp: number;
     attack: number;
     defense: number;
@@ -97,6 +98,7 @@ export default function CheckoutConfirmationPage() {
             key={pokemon.name}
             pokemonName={formatPokemonName(pokemon.name)}
             spriteUrl={pokemon.spriteUrl}
+            cardImageUrl={pokemon.cardImageUrl}
             stats={pokemon}
           />
         ))}
