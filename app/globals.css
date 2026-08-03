@@ -1,6 +1,12 @@
 @import "tailwindcss";
 
+/* Trainer Cave has one consistent look — never respond to the
+   device/system dark-mode preference, so `dark:` utilities never
+   activate and the site renders identically on every device. */
+@custom-variant dark (&:where(.dark, .dark *));
+
 :root {
+  color-scheme: light;
   --background: #ffffff;
   --foreground: #054a91;
 
@@ -24,13 +30,6 @@
   --font-mono: var(--font-geist-mono);
   --font-display: var(--font-fredoka);
   --font-display-alt: var(--font-bungee);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #e4e4e7;
-    --foreground: #054a91;
-  }
 }
 
 body {

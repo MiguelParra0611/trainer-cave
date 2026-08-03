@@ -33,14 +33,14 @@ export function ProductCard({
             sizes="(min-width: 1024px) 25vw, (min-width: 640px) 33vw, 50vw"
           />
         </div>
-        <div className="space-y-2 bg-zinc-100 p-4 pb-2 dark:bg-zinc-800">
+        <div className="space-y-2 bg-zinc-100 p-4 pb-2 dark:bg-zinc-300">
           <div className="flex flex-wrap gap-1.5">
             {product.pokemon.types.map((type) => (
               <TypeBadge key={type.id} name={type.name} colorHex={type.color_hex} />
             ))}
           </div>
           <h3 className="font-medium">{product.name}</h3>
-          <p className="text-sm text-zinc-500 dark:text-zinc-400">
+          <p className="text-sm text-zinc-500 dark:text-zinc-600">
             {product.article_type.name} · {formatPokemonName(product.pokemon.name)}
           </p>
           <p className="font-semibold text-brand-red">
