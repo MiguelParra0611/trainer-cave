@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Suspense } from "react";
 import { LoginForm } from "@/components/auth/LoginForm";
 
 export default function LoginPage() {
@@ -8,7 +9,9 @@ export default function LoginPage() {
         Log in
       </h1>
       <div className="mt-6">
-        <LoginForm />
+        <Suspense fallback={null}>
+          <LoginForm />
+        </Suspense>
       </div>
       <p className="mt-4 text-sm text-zinc-500 dark:text-zinc-600">
         No account?{" "}

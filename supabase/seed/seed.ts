@@ -23,20 +23,12 @@ const CONTENT_TYPE_BY_EXT: Record<string, string> = {
   ".webp": "image/webp",
 };
 
+// Only the generations actually used by the curated catalog (I-IV).
 const GENERATIONS = [
   { id: 1, name: "generation-i", display_name: "Generation I – Kanto" },
   { id: 2, name: "generation-ii", display_name: "Generation II – Johto" },
   { id: 3, name: "generation-iii", display_name: "Generation III – Hoenn" },
   { id: 4, name: "generation-iv", display_name: "Generation IV – Sinnoh" },
-  { id: 5, name: "generation-v", display_name: "Generation V – Unova" },
-  { id: 6, name: "generation-vi", display_name: "Generation VI – Kalos" },
-  { id: 7, name: "generation-vii", display_name: "Generation VII – Alola" },
-  {
-    id: 8,
-    name: "generation-viii",
-    display_name: "Generation VIII – Galar",
-  },
-  { id: 9, name: "generation-ix", display_name: "Generation IX – Paldea" },
 ];
 
 const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));

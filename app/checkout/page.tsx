@@ -17,8 +17,18 @@ export default function CheckoutPage() {
   const [error, setError] = useState<string | null>(null);
   const [name, setName] = useState("");
   const [address, setAddress] = useState("");
+  const [authChecked, setAuthChecked] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const cart = getCart();
+
+  useEffect(() => {
+    const supabase = createClient();
+    supabase.auth.getUser().then(({ data: { user } }) => {
+      setIsLoggedIn(Boolean(user));
+      setAuthChecked(true);
+    });
+  }, []);
 
   useEffect(() => {
     const ids = cart.map((item) => item.productId);
@@ -76,6 +86,22 @@ export default function CheckoutPage() {
     sessionStorage.setItem("trainer-cave:last-order", JSON.stringify(data));
     clearCart();
     router.push("/checkout/confirmation");
+  }
+
+  if (!authChecked) return null;
+
+  if (!isLoggedIn) {
+    return (
+      <div className="mx-auto max-w-lg px-4 py-16 text-center sm:px-6">
+        <p className="text-zinc-500 dark:text-zinc-600">
+          Please{" "}
+          <Link href="/login?next=/checkout" className="text-brand-red underline">
+            log in
+          </Link>{" "}
+          to continue to checkout.
+        </p>
+      </div>
+    );
   }
 
   if (!loading && rows.length === 0) {

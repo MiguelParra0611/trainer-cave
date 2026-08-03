@@ -1,7 +1,7 @@
 "use client";
 
-import { useState } from "react";
-import { addToCart } from "@/lib/cart";
+import { useEffect, useState } from "react";
+import { addToCart, getCart, subscribeToCart } from "@/lib/cart";
 
 export function AddToCartButton({
   productId,
@@ -12,22 +12,26 @@ export function AddToCartButton({
   compact?: boolean;
   className?: string;
 }) {
-  const [added, setAdded] = useState(false);
+  const [inCart, setInCart] = useState(false);
+
+  useEffect(() => {
+    function refresh() {
+      setInCart(getCart().some((item) => item.productId === productId));
+    }
+    refresh();
+    return subscribeToCart(refresh);
+  }, [productId]);
 
   const sizeClasses = compact ? "px-3 py-1.5 text-sm" : "px-6 py-2.5";
 
   return (
     <button
       type="button"
-      onClick={() => {
-        addToCart(productId);
-        setAdded(true);
-        setTimeout(() => setAdded(false), 1500);
-      }}
+      onClick={() => addToCart(productId)}
       className={`rounded-full bg-brand-red font-medium text-white transition-colors hover:bg-brand-red/90 disabled:opacity-70 ${sizeClasses} ${className}`}
-      disabled={added}
+      disabled={inCart}
     >
-      {added ? "Added ✓" : "Add to Cart"}
+      {inCart ? "Added ✓" : "Add to Cart"}
     </button>
   );
 }
