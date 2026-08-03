@@ -1,6 +1,5 @@
-import Link from "next/link";
 import { redirect } from "next/navigation";
-import { ProductCard } from "@/components/catalog/ProductCard";
+import { FavoritesGrid } from "@/components/favorites/FavoritesGrid";
 import { getCurrentUser } from "@/lib/auth";
 import { PRODUCT_SELECT, toProductWithRelations, type RawProductRow } from "@/lib/product-select";
 import { createClient } from "@/lib/supabase/server";
@@ -19,7 +18,10 @@ export default async function FavoritesPage() {
 
   if (error) throw error;
 
-  const products = (data ?? []).map((row) => toProductWithRelations(row.product));
+  const items = (data ?? []).map((row) => {
+    const product = toProductWithRelations(row.product);
+    return { product, imageUrl: productImageUrl(product.primary_image_path) };
+  });
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6">
@@ -27,25 +29,7 @@ export default async function FavoritesPage() {
         Favorites
       </h1>
 
-      {products.length === 0 ? (
-        <p className="mt-4 text-zinc-500 dark:text-zinc-600">
-          No favorites yet.{" "}
-          <Link href="/" className="text-brand-red underline">
-            Browse the catalog
-          </Link>{" "}
-          and tap the heart on a product.
-        </p>
-      ) : (
-        <div className="mt-6 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
-          {products.map((product) => (
-            <ProductCard
-              key={product.id}
-              product={product}
-              imageUrl={productImageUrl(product.primary_image_path)}
-            />
-          ))}
-        </div>
-      )}
+      <FavoritesGrid items={items} />
     </div>
   );
 }

@@ -9,9 +9,11 @@ import type { ProductWithRelations } from "@/types/domain";
 export function ProductCard({
   product,
   imageUrl,
+  onFavoriteToggle,
 }: {
   product: ProductWithRelations;
   imageUrl: string;
+  onFavoriteToggle?: (isFavorite: boolean) => void;
 }) {
   return (
     <div className="group relative overflow-hidden rounded-lg border border-zinc-200 transition-shadow hover:border-brand-red hover:shadow-md dark:border-zinc-800">
@@ -21,6 +23,7 @@ export function ProductCard({
         productId={product.id}
         compact
         className="absolute right-2 top-2 z-10"
+        onToggle={onFavoriteToggle}
       />
 
       <Link href={`/products/${product.id}`} className="block">

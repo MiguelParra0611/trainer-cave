@@ -30,6 +30,7 @@
   --font-mono: var(--font-geist-mono);
   --font-display: var(--font-fredoka);
   --font-display-alt: var(--font-bungee);
+  --font-heading: var(--font-poppins);
 }
 
 body {

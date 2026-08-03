@@ -8,10 +8,12 @@ export function FavoriteButton({
   productId,
   compact = false,
   className = "",
+  onToggle,
 }: {
   productId: string;
   compact?: boolean;
   className?: string;
+  onToggle?: (isFavorite: boolean) => void;
 }) {
   const router = useRouter();
   const [userId, setUserId] = useState<string | null>(null);
@@ -67,9 +69,11 @@ export function FavoriteButton({
         .eq("user_id", userId)
         .eq("product_id", productId);
       setIsFavorite(false);
+      onToggle?.(false);
     } else {
       await supabase.from("favorites").insert({ user_id: userId, product_id: productId });
       setIsFavorite(true);
+      onToggle?.(true);
     }
   }
 
