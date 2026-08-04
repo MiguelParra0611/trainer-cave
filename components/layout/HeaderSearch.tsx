@@ -34,7 +34,7 @@ export function HeaderSearch() {
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     const trimmed = query.trim();
-    router.push(trimmed ? `/?q=${encodeURIComponent(trimmed)}` : "/");
+    router.push(trimmed ? `/?q=${encodeURIComponent(trimmed)}#catalogo` : "/");
     setOpen(false);
     setQuery("");
   }

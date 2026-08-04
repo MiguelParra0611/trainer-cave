@@ -1,5 +1,7 @@
+import { Suspense } from "react";
 import { CatalogFilters } from "@/components/catalog/CatalogFilters";
 import { ProductCard } from "@/components/catalog/ProductCard";
+import { ScrollToCatalog } from "@/components/catalog/ScrollToCatalog";
 import { Hero } from "@/components/home/Hero";
 import { getCatalogData } from "@/lib/catalog";
 import { productImageUrl } from "@/lib/storage";
@@ -16,6 +18,9 @@ export default async function Home({
 
   return (
     <div>
+      <Suspense fallback={null}>
+        <ScrollToCatalog />
+      </Suspense>
       <Hero />
 
       <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6">
@@ -28,7 +33,7 @@ export default async function Home({
           aquí está realmente a la venta.
         </p>
 
-        <div className="mt-8 grid grid-cols-1 gap-8 md:grid-cols-[220px_1fr]">
+        <div id="catalogo" className="mt-8 grid scroll-mt-6 grid-cols-1 gap-8 md:grid-cols-[220px_1fr]">
           <aside>
             <CatalogFilters
               types={types}

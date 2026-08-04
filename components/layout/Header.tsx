@@ -46,7 +46,7 @@ export async function Header() {
               {CATEGORY_LINKS.map((category) => (
                 <Link
                   key={category.slug}
-                  href={`/?article=${category.slug}`}
+                  href={`/?article=${category.slug}#catalogo`}
                   className="hover:text-brand-yellow"
                 >
                   {category.label}

@@ -5,6 +5,10 @@
    activate and the site renders identically on every device. */
 @custom-variant dark (&:where(.dark, .dark *));
 
+html {
+  scroll-behavior: smooth;
+}
+
 :root {
   color-scheme: light;
   --background: #ffffff;
