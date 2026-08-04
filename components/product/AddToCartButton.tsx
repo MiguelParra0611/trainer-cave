@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { addToCart, getCart, subscribeToCart } from "@/lib/cart";
+import { addToCart, getCart, removeFromCart, subscribeToCart } from "@/lib/cart";
 
 export function AddToCartButton({
   productId,
@@ -27,9 +27,14 @@ export function AddToCartButton({
   return (
     <button
       type="button"
-      onClick={() => addToCart(productId)}
-      className={`rounded-full bg-brand-red font-medium text-white transition-colors hover:bg-brand-red/90 disabled:opacity-70 ${sizeClasses} ${className}`}
-      disabled={inCart}
+      onClick={() => (inCart ? removeFromCart(productId) : addToCart(productId))}
+      aria-label={inCart ? "Quitar del carrito" : "Agregar al carrito"}
+      title={inCart ? "Quitar del carrito" : undefined}
+      className={`rounded-full font-medium transition-colors ${sizeClasses} ${className} ${
+        inCart
+          ? "border border-brand-red bg-white text-brand-red hover:bg-red-50"
+          : "bg-brand-red text-white hover:bg-brand-red/90"
+      }`}
     >
       {inCart ? "Agregado ✓" : "Agregar al Carrito"}
     </button>
