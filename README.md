@@ -163,6 +163,14 @@ needed at runtime and should never be added there.
   price (`$ 60.000 COP`) in the single shared `formatPrice()` helper,
   so it's unambiguous everywhere prices appear without touching each
   call site individually.
+- **Add to Cart was a one-way door.** Once added, the button turned
+  into a disabled "Agregado ✓" label — undoing it meant navigating all
+  the way to `/cart` and removing it there, which felt heavy for such
+  a small correction, especially on a long catalog page. Fixed by
+  making the button a real toggle (click again to remove) and adding
+  a persistent floating cart button plus a "back to top" button, so
+  managing the cart or returning to the top never costs your scroll
+  position on a growing product list.
 
 ## Roadmap
 
