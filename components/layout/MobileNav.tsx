@@ -115,7 +115,7 @@ export function MobileNav({ user }: { user: { isAdmin: boolean } | null }) {
       <button
         type="button"
         onClick={() => setOpen(true)}
-        aria-label="Open menu"
+        aria-label="Abrir menú"
         aria-expanded={open}
         className="flex h-9 w-9 items-center justify-center"
       >
@@ -135,18 +135,18 @@ export function MobileNav({ user }: { user: { isAdmin: boolean } | null }) {
       <div
         role="dialog"
         aria-modal="true"
-        aria-label="Menu"
+        aria-label="Menú"
         aria-hidden={!open}
         className={`fixed inset-y-0 right-0 z-50 flex w-72 max-w-[80vw] flex-col bg-white text-brand-navy shadow-xl transition-transform duration-300 ease-in-out ${
           open ? "translate-x-0" : "translate-x-full"
         }`}
       >
         <div className="flex items-center justify-between border-b border-zinc-200 px-4 py-4">
-          <span className="font-heading font-extrabold uppercase tracking-wide">Menu</span>
+          <span className="font-heading font-extrabold uppercase tracking-wide">Menú</span>
           <button
             type="button"
             onClick={close}
-            aria-label="Close menu"
+            aria-label="Cerrar menú"
             className="flex h-9 w-9 items-center justify-center"
           >
             <CloseIcon />
@@ -156,15 +156,15 @@ export function MobileNav({ user }: { user: { isAdmin: boolean } | null }) {
         <nav className="flex flex-col py-2">
           <Link href="/" onClick={close} className={itemClassName}>
             <CatalogIcon />
-            Catalog
+            Catálogo
           </Link>
           <Link href="/favorites" onClick={close} className={itemClassName}>
             <HeartIcon />
-            Favorites
+            Favoritos
           </Link>
           <Link href="/cart" onClick={close} className={itemClassName}>
             <CartIcon />
-            Cart
+            Carrito
           </Link>
           {user?.isAdmin && (
             <Link href="/admin/products" onClick={close} className={itemClassName}>
@@ -185,7 +185,7 @@ export function MobileNav({ user }: { user: { isAdmin: boolean } | null }) {
               onClick={close}
               className="block px-4 py-3 text-sm font-medium text-brand-red hover:bg-zinc-100"
             >
-              Log in
+              Iniciar sesión
             </Link>
           )}
         </div>

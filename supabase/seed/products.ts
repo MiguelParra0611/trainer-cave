@@ -11,11 +11,11 @@ export type ArticleTypeSeed = {
 };
 
 export const ARTICLE_TYPES: ArticleTypeSeed[] = [
-  { slug: "action-figure", name: "Action Figure" },
-  { slug: "crochet-plush", name: "Crochet Plush" },
-  { slug: "t-shirt", name: "T-Shirt" },
+  { slug: "action-figure", name: "Figura de Acción" },
+  { slug: "crochet-plush", name: "Peluche a Crochet" },
+  { slug: "t-shirt", name: "Camiseta" },
   { slug: "hoodie", name: "Hoodie" },
-  { slug: "cap", name: "Cap" },
+  { slug: "cap", name: "Gorra" },
 ];
 
 export type ProductSeed = {
@@ -87,7 +87,7 @@ export const PRODUCTS: ProductSeed[] = CATALOG.flatMap((pokemon) =>
   pokemon.articleTypes.map((articleTypeSlug) => ({
     pokemonSlug: pokemon.slug,
     articleTypeSlug,
-    name: `${pokemon.displayName} ${ARTICLE_TYPE_NAMES[articleTypeSlug]}`,
+    name: `${ARTICLE_TYPE_NAMES[articleTypeSlug]} de ${pokemon.displayName}`,
     description: DESCRIPTION_TEMPLATE[articleTypeSlug](pokemon.displayName),
     priceCents: PRICE_COP[articleTypeSlug] * 100,
     imageFile: `${pokemon.slug}-${articleTypeSlug}.png`,

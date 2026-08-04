@@ -86,23 +86,23 @@ export default function CheckoutPage() {
 
   function validatePayment(): string | null {
     if (paymentMethod === "card") {
-      if (cardName.trim().length === 0) return "Enter the name on the card.";
+      if (cardName.trim().length === 0) return "Ingresa el nombre en la tarjeta.";
       if (cardNumber.replace(/\s/g, "").length !== 16) {
-        return "Card number must be 16 digits.";
+        return "El número de tarjeta debe tener 16 dígitos.";
       }
       const expiryMatch = /^(\d{2})\/(\d{2})$/.exec(cardExpiry);
-      if (!expiryMatch) return "Enter the expiry date as MM/YY.";
+      if (!expiryMatch) return "Ingresa la fecha de vencimiento como MM/AA.";
       const month = Number(expiryMatch[1]);
       const year = 2000 + Number(expiryMatch[2]);
-      if (month < 1 || month > 12) return "Enter a valid expiry month.";
+      if (month < 1 || month > 12) return "Ingresa un mes de vencimiento válido.";
       const expiryDate = new Date(year, month);
-      if (expiryDate.getTime() <= Date.now()) return "This card has expired.";
-      if (cardCvc.length < 3 || cardCvc.length > 4) return "CVC must be 3 or 4 digits.";
+      if (expiryDate.getTime() <= Date.now()) return "Esta tarjeta está vencida.";
+      if (cardCvc.length < 3 || cardCvc.length > 4) return "El CVC debe tener 3 o 4 dígitos.";
       return null;
     }
 
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(paypalEmail)) {
-      return "Enter a valid PayPal email address.";
+      return "Ingresa un correo de PayPal válido.";
     }
     return null;
   }
@@ -127,7 +127,7 @@ export default function CheckoutPage() {
     const data = await res.json();
 
     if (!res.ok) {
-      setError(data.error ?? "Something went wrong.");
+      setError(data.error ?? "Algo salió mal.");
       setSubmitting(false);
       return;
     }
@@ -143,11 +143,11 @@ export default function CheckoutPage() {
     return (
       <div className="mx-auto max-w-lg px-4 py-16 text-center sm:px-6">
         <p className="text-zinc-500 dark:text-zinc-600">
-          Please{" "}
+          Por favor{" "}
           <Link href="/login?next=/checkout" className="text-brand-red underline">
-            log in
+            inicia sesión
           </Link>{" "}
-          to continue to checkout.
+          para continuar con el pago.
         </p>
       </div>
     );
@@ -157,9 +157,9 @@ export default function CheckoutPage() {
     return (
       <div className="mx-auto max-w-lg px-4 py-16 text-center sm:px-6">
         <p className="text-zinc-500 dark:text-zinc-600">
-          Your cart is empty.{" "}
+          Tu carrito está vacío.{" "}
           <Link href="/" className="text-brand-red underline">
-            Browse the catalog
+            Explorar el catálogo
           </Link>
           .
         </p>
@@ -170,10 +170,10 @@ export default function CheckoutPage() {
   return (
     <div className="mx-auto max-w-lg px-4 py-10 sm:px-6">
       <h1 className="text-2xl font-bold text-brand-navy">
-        Checkout
+        Finalizar Compra
       </h1>
       <p className="mt-1 text-sm text-zinc-500 dark:text-zinc-600">
-        This is a simulated checkout — no real payment is collected.
+        Este es un checkout simulado — no se cobra ningún pago real.
       </p>
 
       <div className="mt-6 rounded-lg border border-zinc-200 p-4 dark:border-zinc-800">
@@ -194,7 +194,7 @@ export default function CheckoutPage() {
       <form onSubmit={handleSubmit} className="mt-6 space-y-4">
         <div>
           <label className="block text-sm font-medium" htmlFor="name">
-            Name
+            Nombre
           </label>
           <input
             id="name"
@@ -206,7 +206,7 @@ export default function CheckoutPage() {
         </div>
         <div>
           <label className="block text-sm font-medium" htmlFor="address">
-            Shipping address
+            Dirección de envío
           </label>
           <input
             id="address"
@@ -218,10 +218,11 @@ export default function CheckoutPage() {
         </div>
 
         <div>
-          <p className="block text-sm font-medium">Payment</p>
+          <p className="block text-sm font-medium">Pago</p>
           <p className="mt-1 text-xs text-zinc-500 dark:text-zinc-600">
-            Simulated payment — no card network or PayPal is actually contacted, and
-            nothing you enter here is sent to our server.
+            Pago simulado — no se contacta a ninguna red de tarjetas ni a
+            PayPal, y nada de lo que ingreses aquí se envía a nuestro
+            servidor.
           </p>
 
           <div className="mt-2 flex gap-2">
@@ -235,7 +236,7 @@ export default function CheckoutPage() {
                   : "border-zinc-300 dark:border-zinc-700"
               }`}
             >
-              Card
+              Tarjeta
             </button>
             <button
               type="button"
@@ -255,7 +256,7 @@ export default function CheckoutPage() {
             <div className="mt-3 space-y-3">
               <div>
                 <label className="block text-sm font-medium" htmlFor="card-name">
-                  Name on card
+                  Nombre en la tarjeta
                 </label>
                 <input
                   id="card-name"
@@ -267,7 +268,7 @@ export default function CheckoutPage() {
               </div>
               <div>
                 <label className="block text-sm font-medium" htmlFor="card-number">
-                  Card number
+                  Número de tarjeta
                 </label>
                 <input
                   id="card-number"
@@ -282,13 +283,13 @@ export default function CheckoutPage() {
               <div className="flex gap-3">
                 <div className="flex-1">
                   <label className="block text-sm font-medium" htmlFor="card-expiry">
-                    Expiry
+                    Vencimiento
                   </label>
                   <input
                     id="card-expiry"
                     inputMode="numeric"
                     autoComplete="cc-exp"
-                    placeholder="MM/YY"
+                    placeholder="MM/AA"
                     value={cardExpiry}
                     onChange={(e) => setCardExpiry(formatExpiry(e.target.value))}
                     className="mt-1 w-full rounded-md border border-zinc-300 px-3 py-2 font-mono dark:border-zinc-700 dark:bg-zinc-900"
@@ -313,13 +314,13 @@ export default function CheckoutPage() {
           ) : (
             <div className="mt-3">
               <label className="block text-sm font-medium" htmlFor="paypal-email">
-                PayPal email
+                Correo de PayPal
               </label>
               <input
                 id="paypal-email"
                 type="email"
                 autoComplete="email"
-                placeholder="you@example.com"
+                placeholder="tucorreo@ejemplo.com"
                 value={paypalEmail}
                 onChange={(e) => setPaypalEmail(e.target.value)}
                 className="mt-1 w-full rounded-md border border-zinc-300 px-3 py-2 dark:border-zinc-700 dark:bg-zinc-900"
@@ -337,7 +338,7 @@ export default function CheckoutPage() {
           disabled={submitting || rows.length === 0}
           className="w-full rounded-full bg-brand-red px-4 py-3 font-medium text-white hover:bg-brand-red/90 disabled:opacity-70"
         >
-          {submitting ? "Placing order…" : `Pay ${formatPrice(totalCents, currency)}`}
+          {submitting ? "Procesando pedido…" : `Pagar ${formatPrice(totalCents, currency)}`}
         </button>
       </form>
     </div>

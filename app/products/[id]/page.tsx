@@ -9,7 +9,7 @@ import { formatPokemonName, formatPrice } from "@/lib/format";
 import {
   fetchPokemon,
   fetchPokemonSpecies,
-  getEnglishFlavorText,
+  getSpanishFlavorText,
 } from "@/lib/pokeapi";
 import { productImageUrl } from "@/lib/storage";
 
@@ -22,7 +22,7 @@ async function getPokedexBonus(pokemonId: number) {
       fetchPokemonSpecies(pokemonId, { next: { revalidate: DAY_IN_SECONDS } }),
     ]);
     return {
-      flavorText: getEnglishFlavorText(species),
+      flavorText: getSpanishFlavorText(species),
       cryUrl: pokemon.cries.latest,
     };
   } catch {
@@ -78,7 +78,8 @@ export default async function ProductDetailPage({
           </p>
 
           <p className="mt-4 rounded-md bg-brand-gold/20 px-3 py-2 text-sm font-medium text-brand-navy dark:text-brand-yellow">
-            Includes a {pokemonName} collectible stats card with every order.
+            Incluye una carta coleccionable de estadísticas de {pokemonName}{" "}
+            con cada pedido.
           </p>
 
           <div className="mt-6 flex items-center gap-3">

@@ -24,7 +24,7 @@ export function LogoutButton({
       }}
       className={className}
     >
-      Log out
+      Cerrar sesión
     </button>
   );
 }

@@ -44,8 +44,8 @@ export function SignupForm() {
   if (needsConfirmation) {
     return (
       <p className="text-sm text-zinc-600 dark:text-zinc-600">
-        Check your inbox at <strong>{email}</strong> for a confirmation link
-        to finish creating your account.
+        Revisa tu correo en <strong>{email}</strong> para encontrar el
+        enlace de confirmación y terminar de crear tu cuenta.
       </p>
     );
   }
@@ -54,7 +54,7 @@ export function SignupForm() {
     <form onSubmit={handleSubmit} className="space-y-4">
       <div>
         <label className="block text-sm font-medium" htmlFor="email">
-          Email
+          Correo electrónico
         </label>
         <input
           id="email"
@@ -67,7 +67,7 @@ export function SignupForm() {
       </div>
       <div>
         <label className="block text-sm font-medium" htmlFor="password">
-          Password
+          Contraseña
         </label>
         <input
           id="password"
@@ -85,7 +85,7 @@ export function SignupForm() {
         disabled={loading}
         className="w-full rounded-full bg-brand-red px-4 py-2.5 font-medium text-white hover:bg-brand-red/90 disabled:opacity-70"
       >
-        {loading ? "Creating account…" : "Sign up"}
+        {loading ? "Creando cuenta…" : "Crear cuenta"}
       </button>
     </form>
   );

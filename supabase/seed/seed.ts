@@ -25,10 +25,10 @@ const CONTENT_TYPE_BY_EXT: Record<string, string> = {
 
 // Only the generations actually used by the curated catalog (I-IV).
 const GENERATIONS = [
-  { id: 1, name: "generation-i", display_name: "Generation I – Kanto" },
-  { id: 2, name: "generation-ii", display_name: "Generation II – Johto" },
-  { id: 3, name: "generation-iii", display_name: "Generation III – Hoenn" },
-  { id: 4, name: "generation-iv", display_name: "Generation IV – Sinnoh" },
+  { id: 1, name: "generation-i", display_name: "Generación I – Kanto" },
+  { id: 2, name: "generation-ii", display_name: "Generación II – Johto" },
+  { id: 3, name: "generation-iii", display_name: "Generación III – Hoenn" },
+  { id: 4, name: "generation-iv", display_name: "Generación IV – Sinnoh" },
 ];
 
 const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));

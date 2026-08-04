@@ -1,6 +1,7 @@
 "use client";
 
 import { useRouter, useSearchParams } from "next/navigation";
+import { translateType } from "@/lib/pokemon-type-labels";
 import type { ArticleType, Generation, PokemonType } from "@/types/domain";
 
 function FilterGroup({
@@ -29,7 +30,7 @@ function FilterGroup({
               : "border-zinc-300 dark:border-zinc-700"
           }`}
         >
-          All
+          Todos
         </button>
         {options.map((option) => (
           <button
@@ -75,14 +76,14 @@ export function CatalogFilters({
   return (
     <div className="space-y-5">
       <FilterGroup
-        label="Type"
+        label="Tipo"
         paramKey="type"
         activeValue={searchParams.get("type")}
         onChange={handleChange}
-        options={types.map((t) => ({ value: t.name, label: t.name }))}
+        options={types.map((t) => ({ value: t.name, label: translateType(t.name) }))}
       />
       <FilterGroup
-        label="Generation"
+        label="Generación"
         paramKey="gen"
         activeValue={searchParams.get("gen")}
         onChange={handleChange}
@@ -92,7 +93,7 @@ export function CatalogFilters({
         }))}
       />
       <FilterGroup
-        label="Article"
+        label="Artículo"
         paramKey="article"
         activeValue={searchParams.get("article")}
         onChange={handleChange}

@@ -23,7 +23,7 @@ export function ProductRowActions({
   }
 
   async function deleteProduct() {
-    if (!confirm("Delete this product? This cannot be undone.")) return;
+    if (!confirm("¿Eliminar este producto? Esto no se puede deshacer.")) return;
     setBusy(true);
     const supabase = createClient();
     await supabase.from("products").delete().eq("id", productId);
@@ -39,7 +39,7 @@ export function ProductRowActions({
         disabled={busy}
         className="text-brand-red hover:underline disabled:opacity-60"
       >
-        {isActive ? "Deactivate" : "Activate"}
+        {isActive ? "Desactivar" : "Activar"}
       </button>
       <button
         type="button"
@@ -47,7 +47,7 @@ export function ProductRowActions({
         disabled={busy}
         className="text-brand-red hover:underline disabled:opacity-60"
       >
-        Delete
+        Eliminar
       </button>
     </div>
   );

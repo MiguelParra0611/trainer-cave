@@ -10,6 +10,7 @@ export type CatalogFilterParams = {
   type?: string;
   gen?: string;
   article?: string;
+  q?: string;
 };
 
 export async function getCatalogData(filters: CatalogFilterParams = {}) {
@@ -45,6 +46,14 @@ export async function getCatalogData(filters: CatalogFilterParams = {}) {
   }
   if (filters.article) {
     products = products.filter((p) => p.article_type.slug === filters.article);
+  }
+  if (filters.q) {
+    const query = filters.q.toLowerCase();
+    products = products.filter(
+      (p) =>
+        p.name.toLowerCase().includes(query) ||
+        p.pokemon.name.toLowerCase().includes(query),
+    );
   }
 
   return {

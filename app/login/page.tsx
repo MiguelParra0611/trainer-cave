@@ -6,7 +6,7 @@ export default function LoginPage() {
   return (
     <div className="mx-auto max-w-sm px-4 py-16 sm:px-6">
       <h1 className="text-2xl font-bold text-brand-navy">
-        Log in
+        Iniciar sesión
       </h1>
       <div className="mt-6">
         <Suspense fallback={null}>
@@ -14,9 +14,9 @@ export default function LoginPage() {
         </Suspense>
       </div>
       <p className="mt-4 text-sm text-zinc-500 dark:text-zinc-600">
-        No account?{" "}
+        ¿No tienes cuenta?{" "}
         <Link href="/signup" className="text-brand-red underline">
-          Sign up
+          Regístrate
         </Link>
       </p>
     </div>

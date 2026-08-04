@@ -60,13 +60,13 @@ export function parseIdFromUrl(url: string): number {
 }
 
 /**
- * Live runtime lookup used by the product detail page: an English
+ * Live runtime lookup used by the product detail page: a Spanish
  * Pokedex flavor text entry, cached for 24h via Next.js fetch caching
  * by the caller (this function is just the network call).
  */
-export function getEnglishFlavorText(species: PokeApiSpecies): string | null {
+export function getSpanishFlavorText(species: PokeApiSpecies): string | null {
   const entry = species.flavor_text_entries.find(
-    (e) => e.language.name === "en",
+    (e) => e.language.name === "es",
   );
   return entry ? entry.flavor_text.replace(/[\n\f­]/g, " ") : null;
 }

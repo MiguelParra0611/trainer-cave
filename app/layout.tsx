@@ -35,7 +35,7 @@ const poppins = Poppins({
 export const metadata: Metadata = {
   title: "Trainer Cave",
   description:
-    "Trainer Cave — a fictional Pokémon merch store built as a portfolio project. Not for sale, not affiliated with Nintendo/Game Freak/The Pokémon Company.",
+    "Trainer Cave — una tienda ficticia de merch de Pokémon, creada como proyecto de portafolio. No está a la venta ni afiliada con Nintendo/Game Freak/The Pokémon Company.",
 };
 
 export default function RootLayout({
@@ -45,7 +45,7 @@ export default function RootLayout({
 }>) {
   return (
     <html
-      lang="en"
+      lang="es"
       className={`${geistSans.variable} ${geistMono.variable} ${fredoka.variable} ${bungee.variable} ${poppins.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">

@@ -71,13 +71,13 @@ export default function CartPage() {
 
   return (
     <div className="mx-auto max-w-3xl px-4 py-10 sm:px-6">
-      <h1 className="text-2xl font-bold text-brand-navy">Cart</h1>
+      <h1 className="text-2xl font-bold text-brand-navy">Carrito</h1>
 
       {!loading && rows.length === 0 ? (
         <p className="mt-4 text-zinc-500 dark:text-zinc-600">
-          Your cart is empty.{" "}
+          Tu carrito está vacío.{" "}
           <Link href="/" className="text-brand-red underline">
-            Browse the catalog
+            Explorar el catálogo
           </Link>
           .
         </p>
@@ -106,7 +106,7 @@ export default function CartPage() {
             href="/checkout"
             className="mt-6 block w-full rounded-full bg-brand-red px-4 py-3 text-center font-medium text-white hover:bg-brand-red/90"
           >
-            Proceed to Checkout
+            Ir a Pagar
           </Link>
         </>
       )}

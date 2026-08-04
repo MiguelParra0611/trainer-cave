@@ -3,12 +3,12 @@
 import { useState } from "react";
 
 const STATS: { key: keyof StatBlock; label: string }[] = [
-  { key: "hp", label: "HP" },
-  { key: "attack", label: "Attack" },
-  { key: "defense", label: "Defense" },
-  { key: "special_attack", label: "Sp. Atk" },
-  { key: "special_defense", label: "Sp. Def" },
-  { key: "speed", label: "Speed" },
+  { key: "hp", label: "PS" },
+  { key: "attack", label: "Ataque" },
+  { key: "defense", label: "Defensa" },
+  { key: "special_attack", label: "At. Esp." },
+  { key: "special_defense", label: "Def. Esp." },
+  { key: "speed", label: "Velocidad" },
 ];
 
 const MAX_STAT = 255;
@@ -81,7 +81,7 @@ export function SouvenirStatCard({
           <img src={spriteUrl} alt={pokemonName} className="h-16 w-16 object-contain" />
           <div>
             <p className="text-xs font-semibold uppercase tracking-wide text-brand-gold">
-              Collectible Card
+              Carta Coleccionable
             </p>
             <h4 className="font-semibold capitalize text-brand-navy">
               {pokemonName}
@@ -105,7 +105,7 @@ export function SouvenirStatCard({
     <button
       type="button"
       onClick={() => setFlipped((f) => !f)}
-      aria-label={`Flip the ${pokemonName} collectible card`}
+      aria-label={`Voltear la carta coleccionable de ${pokemonName}`}
       className="relative aspect-[5/7] w-full max-w-[240px] cursor-pointer"
       style={{ perspective: "1000px" }}
     >

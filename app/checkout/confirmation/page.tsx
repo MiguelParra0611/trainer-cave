@@ -47,9 +47,9 @@ export default function CheckoutConfirmationPage() {
     return (
       <div className="mx-auto max-w-lg px-4 py-16 text-center sm:px-6">
         <p className="text-zinc-500 dark:text-zinc-600">
-          No recent order found.{" "}
+          No se encontró ningún pedido reciente.{" "}
           <Link href="/" className="text-brand-red underline">
-            Back to the catalog
+            Volver al catálogo
           </Link>
           .
         </p>
@@ -64,11 +64,11 @@ export default function CheckoutConfirmationPage() {
   return (
     <div className="mx-auto max-w-2xl px-4 py-10 sm:px-6">
       <h1 className="text-2xl font-bold text-brand-navy">
-        Order confirmed!
+        ¡Pedido confirmado!
       </h1>
       <p className="mt-1 text-sm text-zinc-500 dark:text-zinc-600">
-        Order <span className="font-mono">{order.orderId}</span> — this is a
-        simulated order, nothing was actually shipped or charged.
+        Pedido <span className="font-mono">{order.orderId}</span> — este es
+        un pedido simulado, no se envió ni se cobró nada realmente.
       </p>
 
       <div className="mt-6 rounded-lg border border-zinc-200 p-4 dark:border-zinc-800">
@@ -87,10 +87,11 @@ export default function CheckoutConfirmationPage() {
       </div>
 
       <h2 className="mt-8 text-lg font-semibold text-brand-navy">
-        Your collectible cards
+        Tus cartas coleccionables
       </h2>
       <p className="text-sm text-zinc-500 dark:text-zinc-600">
-        Every order includes a stats card for each Pokémon you bought.
+        Cada pedido incluye una carta de estadísticas por cada Pokémon que
+        compraste.
       </p>
       <div className="mt-4 flex flex-wrap gap-4">
         {uniquePokemon.map((pokemon) => (
@@ -108,7 +109,7 @@ export default function CheckoutConfirmationPage() {
         href="/"
         className="mt-8 inline-block rounded-full bg-brand-red px-6 py-2.5 font-medium text-white hover:bg-brand-red/90"
       >
-        Back to the catalog
+        Volver al catálogo
       </Link>
     </div>
   );

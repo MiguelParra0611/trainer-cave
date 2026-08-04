@@ -12,13 +12,13 @@ export default async function AdminProductsPage() {
     <div>
       <div className="flex items-center justify-between">
         <h1 className="text-2xl font-bold text-brand-navy">
-          Products
+          Productos
         </h1>
         <Link
           href="/admin/products/new"
           className="rounded-full bg-brand-red px-4 py-2 text-sm font-medium text-white hover:bg-brand-red/90"
         >
-          New Product
+          Nuevo Producto
         </Link>
       </div>
 
@@ -39,7 +39,7 @@ export default async function AdminProductsPage() {
                 {product.name}{" "}
                 {!product.is_active && (
                   <span className="ml-1 rounded-full bg-zinc-200 px-2 py-0.5 text-xs text-zinc-600 dark:bg-zinc-800 dark:text-zinc-600">
-                    inactive
+                    inactivo
                   </span>
                 )}
               </p>
@@ -52,7 +52,7 @@ export default async function AdminProductsPage() {
               href={`/admin/products/${product.id}/edit`}
               className="text-sm text-brand-red hover:underline"
             >
-              Edit
+              Editar
             </Link>
             <ProductRowActions productId={product.id} isActive={product.is_active} />
           </div>

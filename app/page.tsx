@@ -1,12 +1,13 @@
 import { CatalogFilters } from "@/components/catalog/CatalogFilters";
 import { ProductCard } from "@/components/catalog/ProductCard";
+import { Hero } from "@/components/home/Hero";
 import { getCatalogData } from "@/lib/catalog";
 import { productImageUrl } from "@/lib/storage";
 
 export default async function Home({
   searchParams,
 }: {
-  searchParams: Promise<{ type?: string; gen?: string; article?: string }>;
+  searchParams: Promise<{ type?: string; gen?: string; article?: string; q?: string }>;
 }) {
   const params = await searchParams;
   const { products, types, generations, articleTypes } = await getCatalogData(
@@ -14,41 +15,50 @@ export default async function Home({
   );
 
   return (
-    <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6">
-      <h1 className="font-heading text-4xl font-extrabold text-brand-navy">
-        <span className="uppercase tracking-wide">Trainer</span>{" "}
-        <span className="uppercase text-brand-blue tracking-wide">Cave</span>
-      </h1>
-      <p className="mt-2 max-w-xl text-zinc-600 dark:text-zinc-600">
-        Fictional Pokémon merch, made for portfolio purposes only. Nothing
-        here is actually for sale.
-      </p>
+    <div>
+      <Hero />
 
-      <div className="mt-8 grid grid-cols-1 gap-8 md:grid-cols-[220px_1fr]">
-        <aside>
-          <CatalogFilters
-            types={types}
-            generations={generations}
-            articleTypes={articleTypes}
-          />
-        </aside>
+      <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6">
+        <h1 className="font-heading text-4xl font-extrabold text-brand-navy">
+          <span className="uppercase tracking-wide">Trainer</span>{" "}
+          <span className="uppercase text-brand-blue tracking-wide">Cave</span>
+        </h1>
+        <p className="mt-2 max-w-xl text-zinc-600 dark:text-zinc-600">
+          Merch ficticio de Pokémon, hecho solo con fines de portafolio. Nada
+          aquí está realmente a la venta.
+        </p>
 
-        <div>
-          {products.length === 0 ? (
-            <p className="text-zinc-500 dark:text-zinc-600">
-              No products match these filters.
-            </p>
-          ) : (
-            <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
-              {products.map((product) => (
-                <ProductCard
-                  key={product.id}
-                  product={product}
-                  imageUrl={productImageUrl(product.primary_image_path)}
-                />
-              ))}
-            </div>
-          )}
+        <div className="mt-8 grid grid-cols-1 gap-8 md:grid-cols-[220px_1fr]">
+          <aside>
+            <CatalogFilters
+              types={types}
+              generations={generations}
+              articleTypes={articleTypes}
+            />
+          </aside>
+
+          <div>
+            {params.q && (
+              <p className="mb-4 text-sm text-zinc-500 dark:text-zinc-600">
+                Resultados para <span className="font-medium text-brand-navy">&quot;{params.q}&quot;</span>
+              </p>
+            )}
+            {products.length === 0 ? (
+              <p className="text-zinc-500 dark:text-zinc-600">
+                Ningún producto coincide con estos filtros.
+              </p>
+            ) : (
+              <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
+                {products.map((product) => (
+                  <ProductCard
+                    key={product.id}
+                    product={product}
+                    imageUrl={productImageUrl(product.primary_image_path)}
+                  />
+                ))}
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </div>

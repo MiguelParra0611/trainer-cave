@@ -19,11 +19,11 @@ export function FavoritesGrid({
   if (visibleItems.length === 0) {
     return (
       <p className="mt-4 text-zinc-500 dark:text-zinc-600">
-        No favorites yet.{" "}
+        Aún no tienes favoritos.{" "}
         <Link href="/" className="text-brand-red underline">
-          Browse the catalog
+          Explorar el catálogo
         </Link>{" "}
-        and tap the heart on a product.
+        y toca el corazón en un producto.
       </p>
     );
   }

@@ -12,7 +12,7 @@ export async function POST(request: Request) {
   );
 
   if (requestedItems.length === 0) {
-    return NextResponse.json({ error: "Cart is empty" }, { status: 400 });
+    return NextResponse.json({ error: "El carrito está vacío" }, { status: 400 });
   }
 
   const supabase = await createClient();
@@ -43,7 +43,7 @@ export async function POST(request: Request) {
     .filter((row): row is { product: (typeof products)[number]; quantity: number } => row !== null);
 
   if (orderItems.length === 0) {
-    return NextResponse.json({ error: "No valid products in cart" }, { status: 400 });
+    return NextResponse.json({ error: "No hay productos válidos en el carrito" }, { status: 400 });
   }
 
   const totalCents = orderItems.reduce(

@@ -49,7 +49,7 @@ export function CartItemRow({
             type="button"
             onClick={() => onQuantityChange(quantity - 1)}
             className="h-7 w-7 shrink-0 rounded-full border border-zinc-300 text-sm dark:border-zinc-700"
-            aria-label="Decrease quantity"
+            aria-label="Disminuir cantidad"
           >
             −
           </button>
@@ -58,7 +58,7 @@ export function CartItemRow({
             type="button"
             onClick={() => onQuantityChange(quantity + 1)}
             className="h-7 w-7 shrink-0 rounded-full border border-zinc-300 text-sm dark:border-zinc-700"
-            aria-label="Increase quantity"
+            aria-label="Aumentar cantidad"
           >
             +
           </button>
@@ -72,9 +72,9 @@ export function CartItemRow({
           type="button"
           onClick={onRemove}
           className="shrink-0 text-sm text-zinc-400 hover:text-brand-red"
-          aria-label="Remove from cart"
+          aria-label="Quitar del carrito"
         >
-          Remove
+          Quitar
         </button>
       </div>
     </div>

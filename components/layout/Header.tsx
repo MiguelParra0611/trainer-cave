@@ -1,10 +1,20 @@
 import Image from "next/image";
 import Link from "next/link";
 import { getCurrentUser } from "@/lib/auth";
-import { LogoutButton } from "@/components/layout/LogoutButton";
+import { HeaderAccountMenu } from "@/components/layout/HeaderAccountMenu";
+import { HeaderCartLink } from "@/components/layout/HeaderCartLink";
+import { HeaderSearch } from "@/components/layout/HeaderSearch";
 import { MobileNav } from "@/components/layout/MobileNav";
 import logo from "@/public/logo.png";
 import logoIcon from "@/public/logo-icon.png";
+
+const CATEGORY_LINKS = [
+  { slug: "action-figure", label: "Figuras" },
+  { slug: "crochet-plush", label: "Peluches" },
+  { slug: "t-shirt", label: "Camisetas" },
+  { slug: "hoodie", label: "Hoodies" },
+  { slug: "cap", label: "Gorras" },
+];
 
 export async function Header() {
   const user = await getCurrentUser();
@@ -23,50 +33,33 @@ export async function Header() {
           </div>
         </div>
 
-        {/* Desktop: logo left, full nav right. */}
-        <div className="hidden items-center justify-between gap-4 sm:flex">
-          <Link href="/" className="flex shrink-0 items-center">
-            <Image src={logo} alt="Trainer Cave" priority className="h-10 w-auto shrink-0" />
-          </Link>
-          <nav className="flex items-center gap-4 text-sm font-medium">
-            <Link href="/" className="hover:text-brand-yellow">
-              Catalog
+        {/* Desktop: logo, inline category nav, search/account/cart icons. */}
+        <div className="hidden items-center justify-between gap-6 sm:flex">
+          <div className="flex items-center gap-6">
+            <Link href="/" className="flex shrink-0 items-center">
+              <Image src={logo} alt="Trainer Cave" priority className="h-10 w-auto shrink-0" />
             </Link>
-            <Link href="/favorites" className="hover:text-brand-yellow">
-              Favorites
-            </Link>
-            <Link href="/cart" aria-label="Cart" className="hover:text-brand-yellow">
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="h-5 w-5"
-                aria-hidden="true"
-              >
-                <circle cx="9" cy="21" r="1" />
-                <circle cx="19" cy="21" r="1" />
-                <path d="M2.5 3h2l2.4 12.2a2 2 0 0 0 2 1.6h8.2a2 2 0 0 0 2-1.6L21 8H6" />
-              </svg>
-            </Link>
-            {user?.isAdmin && (
-              <Link href="/admin/products" className="hover:text-brand-yellow">
-                Admin
+            <nav className="flex items-center gap-4 text-sm font-medium">
+              <Link href="/" className="hover:text-brand-yellow">
+                Catálogo
               </Link>
-            )}
-            {user ? (
-              <LogoutButton />
-            ) : (
-              <Link
-                href="/login"
-                className="rounded-full bg-white px-3 py-1.5 text-brand-red hover:bg-brand-yellow"
-              >
-                Log in
-              </Link>
-            )}
-          </nav>
+              {CATEGORY_LINKS.map((category) => (
+                <Link
+                  key={category.slug}
+                  href={`/?article=${category.slug}`}
+                  className="hover:text-brand-yellow"
+                >
+                  {category.label}
+                </Link>
+              ))}
+            </nav>
+          </div>
+
+          <div className="flex items-center gap-1">
+            <HeaderSearch />
+            <HeaderAccountMenu user={user} />
+            <HeaderCartLink />
+          </div>
         </div>
       </div>
     </header>

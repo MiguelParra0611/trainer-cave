@@ -31,7 +31,7 @@ export function AddToCartButton({
       className={`rounded-full bg-brand-red font-medium text-white transition-colors hover:bg-brand-red/90 disabled:opacity-70 ${sizeClasses} ${className}`}
       disabled={inCart}
     >
-      {inCart ? "Added ✓" : "Add to Cart"}
+      {inCart ? "Agregado ✓" : "Agregar al Carrito"}
     </button>
   );
 }

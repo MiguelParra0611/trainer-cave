@@ -10,7 +10,7 @@ export function PokedexBonus({
   return (
     <div className="mt-6 rounded-lg border border-zinc-200 bg-zinc-50 p-4 dark:border-zinc-800 dark:bg-zinc-900">
       <p className="text-xs font-semibold uppercase tracking-wide text-brand-navy">
-        Pokédex Entry
+        Entrada de la Pokédex
       </p>
       {flavorText && (
         <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-600">
@@ -24,7 +24,7 @@ export function PokedexBonus({
         </div>
       )}
       <p className="mt-2 text-[11px] text-zinc-400 dark:text-zinc-500">
-        Live from PokéAPI
+        En vivo desde PokéAPI
       </p>
     </div>
   );

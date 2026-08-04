@@ -38,7 +38,7 @@ export function ProductForm({
     setError(null);
 
     if (!isEditing && !imageFile) {
-      setError("An image is required for a new product.");
+      setError("Se requiere una imagen para un producto nuevo.");
       setSubmitting(false);
       return;
     }
@@ -47,7 +47,7 @@ export function ProductForm({
     const pokemon = pokemonOptions.find((p) => String(p.id) === pokemonId);
     const articleType = articleTypeOptions.find((a) => String(a.id) === articleTypeId);
     if (!pokemon || !articleType) {
-      setError("Pick a Pokémon and an article type.");
+      setError("Elige un Pokémon y un tipo de artículo.");
       setSubmitting(false);
       return;
     }
@@ -113,7 +113,7 @@ export function ProductForm({
         </div>
         <div>
           <label className="block text-sm font-medium" htmlFor="articleType">
-            Article type
+            Tipo de artículo
           </label>
           <select
             id="articleType"
@@ -132,7 +132,7 @@ export function ProductForm({
 
       <div>
         <label className="block text-sm font-medium" htmlFor="name">
-          Name
+          Nombre
         </label>
         <input
           id="name"
@@ -145,7 +145,7 @@ export function ProductForm({
 
       <div>
         <label className="block text-sm font-medium" htmlFor="description">
-          Description
+          Descripción
         </label>
         <textarea
           id="description"
@@ -159,7 +159,7 @@ export function ProductForm({
 
       <div>
         <label className="block text-sm font-medium" htmlFor="price">
-          Price (COP)
+          Precio (COP)
         </label>
         <input
           id="price"
@@ -175,7 +175,7 @@ export function ProductForm({
 
       <div>
         <label className="block text-sm font-medium" htmlFor="image">
-          {isEditing ? "Replace image (optional)" : "Image"}
+          {isEditing ? "Reemplazar imagen (opcional)" : "Imagen"}
         </label>
         <input
           id="image"
@@ -193,7 +193,7 @@ export function ProductForm({
         disabled={submitting}
         className="rounded-full bg-brand-red px-6 py-2.5 font-medium text-white hover:bg-brand-red/90 disabled:opacity-70"
       >
-        {submitting ? "Saving…" : isEditing ? "Save Changes" : "Create Product"}
+        {submitting ? "Guardando…" : isEditing ? "Guardar Cambios" : "Crear Producto"}
       </button>
     </form>
   );
