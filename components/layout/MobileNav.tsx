@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { LogoutButton } from "@/components/layout/LogoutButton";
 
 function CatalogIcon() {
@@ -95,69 +95,101 @@ function CloseIcon() {
 }
 
 const itemClassName =
-  "flex items-center gap-3 px-4 py-3 text-sm font-medium hover:bg-zinc-100";
+  "flex items-center gap-3 px-4 py-3 text-sm font-medium text-brand-navy hover:bg-zinc-100";
 
 export function MobileNav({ user }: { user: { isAdmin: boolean } | null }) {
   const [open, setOpen] = useState(false);
   const close = () => setOpen(false);
 
+  useEffect(() => {
+    if (!open) return;
+    const original = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = original;
+    };
+  }, [open]);
+
   return (
-    <div className="relative sm:hidden">
+    <div className="sm:hidden">
       <button
         type="button"
-        onClick={() => setOpen((o) => !o)}
-        aria-label={open ? "Close menu" : "Open menu"}
+        onClick={() => setOpen(true)}
+        aria-label="Open menu"
         aria-expanded={open}
         className="flex h-9 w-9 items-center justify-center"
       >
-        {open ? <CloseIcon /> : <HamburgerIcon />}
+        <HamburgerIcon />
       </button>
 
-      {open && (
-        <>
+      {/* Backdrop */}
+      <div
+        onClick={close}
+        aria-hidden="true"
+        className={`fixed inset-0 z-40 bg-black/40 transition-opacity duration-300 ${
+          open ? "opacity-100" : "pointer-events-none opacity-0"
+        }`}
+      />
+
+      {/* Slide-in panel */}
+      <div
+        role="dialog"
+        aria-modal="true"
+        aria-label="Menu"
+        aria-hidden={!open}
+        className={`fixed inset-y-0 right-0 z-50 flex w-72 max-w-[80vw] flex-col bg-white text-brand-navy shadow-xl transition-transform duration-300 ease-in-out ${
+          open ? "translate-x-0" : "translate-x-full"
+        }`}
+      >
+        <div className="flex items-center justify-between border-b border-zinc-200 px-4 py-4">
+          <span className="font-heading font-extrabold uppercase tracking-wide">Menu</span>
           <button
             type="button"
-            aria-label="Close menu"
             onClick={close}
-            className="fixed inset-0 z-40 cursor-default"
-          />
-          <div className="absolute right-0 top-full z-50 mt-2 w-56 overflow-hidden rounded-lg bg-white text-brand-navy shadow-lg">
-            <Link href="/" onClick={close} className={itemClassName}>
-              <CatalogIcon />
-              Catalog
+            aria-label="Close menu"
+            className="flex h-9 w-9 items-center justify-center"
+          >
+            <CloseIcon />
+          </button>
+        </div>
+
+        <nav className="flex flex-col py-2">
+          <Link href="/" onClick={close} className={itemClassName}>
+            <CatalogIcon />
+            Catalog
+          </Link>
+          <Link href="/favorites" onClick={close} className={itemClassName}>
+            <HeartIcon />
+            Favorites
+          </Link>
+          <Link href="/cart" onClick={close} className={itemClassName}>
+            <CartIcon />
+            Cart
+          </Link>
+          {user?.isAdmin && (
+            <Link href="/admin/products" onClick={close} className={itemClassName}>
+              Admin
             </Link>
-            <Link href="/favorites" onClick={close} className={itemClassName}>
-              <HeartIcon />
-              Favorites
+          )}
+        </nav>
+
+        <div className="mt-auto border-t border-zinc-200">
+          {user ? (
+            <LogoutButton
+              className="block w-full px-4 py-3 text-left text-sm font-medium text-brand-red hover:bg-zinc-100"
+              onLoggedOut={close}
+            />
+          ) : (
+            <Link
+              href="/login"
+              onClick={close}
+              className="block px-4 py-3 text-sm font-medium text-brand-red hover:bg-zinc-100"
+            >
+              Log in
             </Link>
-            <Link href="/cart" onClick={close} className={itemClassName}>
-              <CartIcon />
-              Cart
-            </Link>
-            {user?.isAdmin && (
-              <Link href="/admin/products" onClick={close} className={itemClassName}>
-                Admin
-              </Link>
-            )}
-            <div className="border-t border-zinc-200">
-              {user ? (
-                <LogoutButton
-                  className="block w-full px-4 py-3 text-left text-sm font-medium text-brand-red hover:bg-zinc-100"
-                  onLoggedOut={close}
-                />
-              ) : (
-                <Link
-                  href="/login"
-                  onClick={close}
-                  className="block px-4 py-3 text-sm font-medium text-brand-red hover:bg-zinc-100"
-                >
-                  Log in
-                </Link>
-              )}
-            </div>
-          </div>
-        </>
-      )}
+          )}
+        </div>
+      </div>
     </div>
   );
 }
