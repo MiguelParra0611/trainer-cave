@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import heroImage from "@/public/enteihero.png";
+import heroImage from "@/public/enteihero.jpg";
 
 export function Hero() {
   return (
