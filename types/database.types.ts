@@ -108,6 +108,27 @@ export type Database = {
         }
         Relationships: []
       }
+      login_attempts: {
+        Row: {
+          attempt_count: number
+          email: string
+          first_attempt_at: string
+          locked_until: string | null
+        }
+        Insert: {
+          attempt_count?: number
+          email: string
+          first_attempt_at?: string
+          locked_until?: string | null
+        }
+        Update: {
+          attempt_count?: number
+          email?: string
+          first_attempt_at?: string
+          locked_until?: string | null
+        }
+        Relationships: []
+      }
       order_items: {
         Row: {
           id: string
@@ -352,7 +373,10 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      check_login_rate_limit: { Args: { p_email: string }; Returns: undefined }
       is_admin: { Args: never; Returns: boolean }
+      record_login_failure: { Args: { p_email: string }; Returns: undefined }
+      record_login_success: { Args: { p_email: string }; Returns: undefined }
     }
     Enums: {
       [_ in never]: never

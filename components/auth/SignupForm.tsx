@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
+import { Turnstile } from "@/components/auth/Turnstile";
 
 export function SignupForm() {
   const router = useRouter();
@@ -11,6 +12,9 @@ export function SignupForm() {
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const [needsConfirmation, setNeedsConfirmation] = useState(false);
+  const [captchaToken, setCaptchaToken] = useState<string | null>(null);
+  const [turnstileKey, setTurnstileKey] = useState(0);
+  const captchaRequired = Boolean(process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY);
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -21,8 +25,13 @@ export function SignupForm() {
     const { data, error } = await supabase.auth.signUp({
       email,
       password,
-      options: { emailRedirectTo: `${window.location.origin}/auth/callback` },
+      options: {
+        emailRedirectTo: `${window.location.origin}/auth/callback`,
+        ...(captchaToken ? { captchaToken } : {}),
+      },
     });
+    setCaptchaToken(null);
+    setTurnstileKey((k) => k + 1);
 
     if (error) {
       setError(error.message);
@@ -79,10 +88,11 @@ export function SignupForm() {
           className="mt-1 w-full rounded-md border border-zinc-300 px-3 py-2 dark:border-zinc-700 dark:bg-zinc-900"
         />
       </div>
+      <Turnstile key={turnstileKey} onVerify={setCaptchaToken} resetKey={turnstileKey} />
       {error && <p className="text-sm text-brand-red">{error}</p>}
       <button
         type="submit"
-        disabled={loading}
+        disabled={loading || (captchaRequired && !captchaToken)}
         className="w-full rounded-full bg-brand-red px-4 py-2.5 font-medium text-white hover:bg-brand-red/90 disabled:opacity-70"
       >
         {loading ? "Creando cuenta…" : "Crear cuenta"}

@@ -7,6 +7,14 @@ import type { ProductWithRelations } from "@/types/domain";
 
 type Option = { id: string | number; name: string; slug: string };
 
+// Mirrors the product-images bucket's allowed_mime_types/file_size_limit
+// (see supabase/migrations) — validated client-side too so bad uploads are
+// rejected with a clear message instead of a raw storage error. SVG is
+// deliberately excluded: it can carry embedded script/XSS if ever served
+// or opened directly.
+const ALLOWED_IMAGE_TYPES = ["image/png", "image/jpeg", "image/webp", "image/gif"];
+const MAX_IMAGE_BYTES = 5 * 1024 * 1024;
+
 export function ProductForm({
   pokemonOptions,
   articleTypeOptions,
@@ -54,6 +62,16 @@ export function ProductForm({
 
     let primaryImagePath = initialProduct?.primary_image_path ?? "";
     if (imageFile) {
+      if (!ALLOWED_IMAGE_TYPES.includes(imageFile.type)) {
+        setError("La imagen debe ser PNG, JPEG, WEBP o GIF.");
+        setSubmitting(false);
+        return;
+      }
+      if (imageFile.size > MAX_IMAGE_BYTES) {
+        setError("La imagen no puede superar 5 MB.");
+        setSubmitting(false);
+        return;
+      }
       const ext = imageFile.name.slice(imageFile.name.lastIndexOf("."));
       const path = `${pokemon.slug}/${articleType.slug}${ext}`;
       const { error: uploadError } = await supabase.storage
@@ -180,7 +198,7 @@ export function ProductForm({
         <input
           id="image"
           type="file"
-          accept="image/*"
+          accept="image/png,image/jpeg,image/webp,image/gif"
           onChange={(e) => setImageFile(e.target.files?.[0] ?? null)}
           className="mt-1 w-full text-sm"
         />

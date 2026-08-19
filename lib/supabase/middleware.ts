@@ -13,6 +13,9 @@ export async function updateSession(request: NextRequest) {
 
   try {
     const supabase = createServerClient(url, anonKey, {
+      // Pin Secure explicitly in production; see lib/supabase/client.ts for
+      // why httpOnly stays at the library default (false).
+      cookieOptions: { secure: process.env.NODE_ENV === "production" },
       cookies: {
         getAll() {
           return request.cookies.getAll();

@@ -1,0 +1,27 @@
+-- Corrects a no-op in 0009_pending_privilege_and_order_item_fixes.sql.
+--
+-- That migration ran `revoke update (is_admin) on public.profiles from
+-- anon, authenticated;` and was verified afterward only by checking
+-- `count(*) where is_admin = true` (which stayed 0) — never by actually
+-- testing the grant itself. Rediscovered during a follow-up security pass
+-- on 2026-08-19 using has_column_privilege()/has_table_privilege(), which
+-- confirmed anon/authenticated could still set is_admin = true the whole
+-- time: Postgres column-level REVOKE only removes an access path that was
+-- itself granted at the column level. Supabase's default table-level
+-- "grant update on profiles to anon, authenticated" (implicitly covering
+-- every column) was never touched by that REVOKE, so the escalation
+-- described in 0009 was still live in production from the original audit
+-- date until this migration.
+--
+-- profiles has exactly two columns (id, is_admin) and no app code anywhere
+-- updates it from the client (grepped), so there is no legitimate column
+-- to preserve client UPDATE access to — revoking at the table level is
+-- both correct and has zero functional impact.
+--
+-- Verified after applying: has_table_privilege('anon', 'public.profiles',
+-- 'UPDATE') and the 'authenticated' equivalent both return false, as does
+-- has_column_privilege(..., 'is_admin', 'UPDATE') for both roles. No
+-- account had is_admin = true at any point while this was open (confirmed
+-- via `select count(*) from profiles where is_admin = true` — 0, both
+-- before and after this fix).
+revoke update on public.profiles from anon, authenticated;

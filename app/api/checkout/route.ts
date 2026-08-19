@@ -5,11 +5,38 @@ import { productImageUrl } from "@/lib/storage";
 
 type CheckoutRequestItem = { productId: string; quantity: number };
 
+const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+const MAX_QUANTITY_PER_ITEM = 100;
+
+/** Type/format/range-checks each cart line before it ever reaches a query —
+ * rejects malformed ids and unreasonable or non-integer quantities instead
+ * of trusting whatever JSON the client sent. */
+function parseCheckoutItems(body: unknown): CheckoutRequestItem[] {
+  if (!body || typeof body !== "object" || !Array.isArray((body as { items?: unknown }).items)) {
+    return [];
+  }
+  const items = (body as { items: unknown[] }).items;
+  const parsed: CheckoutRequestItem[] = [];
+  for (const raw of items) {
+    if (!raw || typeof raw !== "object") continue;
+    const { productId, quantity } = raw as { productId?: unknown; quantity?: unknown };
+    if (typeof productId !== "string" || !UUID_RE.test(productId)) continue;
+    if (
+      typeof quantity !== "number" ||
+      !Number.isInteger(quantity) ||
+      quantity <= 0 ||
+      quantity > MAX_QUANTITY_PER_ITEM
+    ) {
+      continue;
+    }
+    parsed.push({ productId, quantity });
+  }
+  return parsed;
+}
+
 export async function POST(request: Request) {
-  const body = (await request.json()) as { items?: CheckoutRequestItem[] };
-  const requestedItems = (body.items ?? []).filter(
-    (item) => item.productId && item.quantity > 0,
-  );
+  const body = await request.json().catch(() => null);
+  const requestedItems = parseCheckoutItems(body);
 
   if (requestedItems.length === 0) {
     return NextResponse.json({ error: "El carrito está vacío" }, { status: 400 });
@@ -26,7 +53,11 @@ export async function POST(request: Request) {
     .returns<RawProductRow[]>();
 
   if (productsError) {
-    return NextResponse.json({ error: productsError.message }, { status: 500 });
+    // Log the real DB error server-side only — the raw Postgres/PostgREST
+    // message can name tables, columns or constraints and shouldn't be
+    // handed to the client.
+    console.error("checkout: products lookup failed", productsError);
+    return NextResponse.json({ error: "No se pudo procesar el pedido" }, { status: 500 });
   }
 
   const products = (productRows ?? []).map(toProductWithRelations);
@@ -62,10 +93,8 @@ export async function POST(request: Request) {
     .single();
 
   if (orderError || !order) {
-    return NextResponse.json(
-      { error: orderError?.message ?? "Could not create order" },
-      { status: 500 },
-    );
+    console.error("checkout: order insert failed", orderError);
+    return NextResponse.json({ error: "No se pudo crear el pedido" }, { status: 500 });
   }
 
   const { error: itemsError } = await supabase.from("order_items").insert(
@@ -78,7 +107,8 @@ export async function POST(request: Request) {
   );
 
   if (itemsError) {
-    return NextResponse.json({ error: itemsError.message }, { status: 500 });
+    console.error("checkout: order_items insert failed", itemsError);
+    return NextResponse.json({ error: "No se pudo completar el pedido" }, { status: 500 });
   }
 
   return NextResponse.json({
